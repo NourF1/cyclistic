@@ -8,7 +8,8 @@ WITH raw_data AS (
 )
 
 -- Filter and clean data
-SELECT
+WITH CTE AS (
+  SELECT
   ride_id,
   rideable_type,
   started_at,
@@ -31,6 +32,7 @@ WHERE
   ended_at IS NOT NULL AND
   CONVERT(DATETIME, started_at, 101) IS NOT NULL AND
   CONVERT(DATETIME, ended_at, 101) IS NOT NULL;
+)
 
 -- Filter valid trips and remove unnecessary columns
 WITH filtered_data AS (
